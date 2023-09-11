@@ -9,9 +9,8 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "colors": "^1.4.0",
     "elysia": "^0.6.22"
   },
-  "scripts": {
-    
-  }
+  "scripts": {}
 }
