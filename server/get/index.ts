@@ -1,6 +1,10 @@
+import { extractGetParameters } from "../../src/util"
+
 export default {
     path: "/",
-    callback: () => {
-        return "Hello World!"
+    callback: (req: any) => {
+        return new Promise((resolve, reject) => {
+            resolve(JSON.stringify(req))
+        })
     },
 }
