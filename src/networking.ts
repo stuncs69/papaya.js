@@ -12,18 +12,33 @@ export default class NetCore {
     private server: https.Server;
     port: number;
     listening: boolean = false;
+    private middleware: Array<Function> = [];
 
     constructor(port: number) {
         this.connections = []
         this.server = https.createServer();
         this.port = port;
     }
+    private async runMiddleware(req: https.IncomingMessage, res: https.ServerResponse, middleware: Array<Function>) {
+        let middlewareData: { [key: string]: any } = {};
+        for (const middlewareItem of middleware) {
+            try {
+                const data = await middlewareItem(req, res);
+                middlewareData[middlewareItem.name] = data;
+            } catch (error: any) {
+                console.error(`Error in middleware ${middlewareItem.name}: ${error.message}`);
+            }
+        }
+        return middlewareData;
+    }
+    
 
     addGet(path: string, callback: Function) {
-        this.server.on("request", (req, res) => {
+        this.server.on("request", async (req, res) => {
             if (req.method == "GET" && req.url == path) {
-                console.log(color.bold(color.green(`[!]`) + " GET request from " + req.socket.remoteAddress + " at " + path))
-                callback(req, res).then((data: any) => {
+                console.log(color.bold(color.green(`[!]`) + " GET request at " + path))
+                const middlewareData = await this.runMiddleware(req, res, this.middleware);
+                callback(req, res, middlewareData).then((data: any) => {
                     res.setHeader("Content-Type", "text/html")
                     res.end(data.toString());
                 });;
@@ -32,10 +47,11 @@ export default class NetCore {
     }
 
     addPost(path: string, callback: Function) {
-        this.server.on("request", (req, res) => {
+        this.server.on("request", async (req, res) => {
             if (req.method == "POST" && req.url == path) {
-                console.log(color.bold(color.green(`[!]`) + " POST request from " + req.socket.remoteAddress + " at " + path))
-                callback(req, res).then((data: any) => {
+                console.log(color.bold(color.green(`[!]`) + " POST request at " + path))
+                const middlewareData = await this.runMiddleware(req, res, this.middleware);
+                callback(req, res, middlewareData).then((data: any) => {
                     res.end(data.toString());
                 });
             }
@@ -60,6 +76,11 @@ export default class NetCore {
             }
         })
     }
+
+    addMiddleware(middleware: (req: any, res: any) => Promise<void>) {
+        this.middleware.push(middleware);
+        console.log(color.bold(color.green(`[!]`) + " Added middleware: " + middleware.name))
+    }    
 
     listen() {
         this.server.listen(this.port);

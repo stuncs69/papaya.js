@@ -1,3 +1,5 @@
+import fs from "fs";
+
 interface Request {
     request: {
         url: string,
@@ -24,4 +26,13 @@ function extractGetParameters(struct: Request): { [key: string]: string } {
     return queryParameters;
 }
 
-export { extractGetParameters }
+function getPublicFileContents(path: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+        fs.readFile("./server/public/" + path, (err, data) => {
+            if (err) reject(err);
+            resolve(data.toString());
+        })
+    })
+}
+
+export { extractGetParameters, getPublicFileContents }

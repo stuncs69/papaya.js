@@ -1,10 +1,10 @@
-import { extractGetParameters } from "../../src/util"
+import { getPublicFileContents } from "../../src/util"
 
 export default {
     path: "/",
-    callback: (req: any) => {
+    callback: (req: any, res: any, middlewareData: any) => {
         return new Promise((resolve, reject) => {
-            resolve(`a`)
+            resolve(JSON.stringify(middlewareData))
         })
     },
 }
