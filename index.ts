@@ -8,6 +8,8 @@ const x = new NetCore(3000);
 
 let usedRoutes: Array<string> = [];
 
+x.addPublics();
+
 fs.readdirSync("./server/get").forEach((file) => {
     if (file.endsWith(".ts")) {
         const route = require(`./server/get/${file}`);
