@@ -1,6 +1,7 @@
 {
-  "name": "chttps",
+  "name": "chttps.js",
   "module": "index.ts",
+  "version": "0.0.2",
   "type": "module",
   "devDependencies": {
     "bun-types": "latest"
@@ -9,9 +10,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "chttps": "^1.0.6",
-    "colors": "^1.4.0",
-    "elysia": "^0.6.22"
+    "colors": "^1.4.0"
   },
   "scripts": {}
 }

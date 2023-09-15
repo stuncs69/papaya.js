@@ -12,7 +12,7 @@ interface Request {
 
 function getPublicFileContents(path: string): Promise<string> {
     return new Promise((resolve, reject) => {
-        fs.readFile("./server/public/" + path, (err, data) => {
+        fs.readFile(__dirname + "/server/public/" + path, (err, data) => {
             if (err) reject(err);
             resolve(data.toString());
         })

@@ -15,9 +15,9 @@ export class CHTTPServer {
 
         console.log(colors.bold(colors.blue("Starting CHTTPS Server...")))
 
-        fs.readdirSync("./server/get").forEach((file) => {
+        fs.readdirSync(__dirname + "/server/get").forEach((file) => {
             if (file.endsWith(".ts")) {
-                const route = require(`./server/get/${file}`);
+                const route = require(__dirname +  `/server/get/${file}`);
                 if (this.usedRoutes.includes(route.default.path)) {
                     console.log(colors.bold(colors.red(`[!]`) + " Duplicate route: " + route.default.path + " at " + file))
                     process.exit(1);
@@ -28,9 +28,9 @@ export class CHTTPServer {
             }
         })
 
-        fs.readdirSync("./server/post").forEach((file) => {
+        fs.readdirSync(__dirname + "/server/post").forEach((file) => {
             if (file.endsWith(".ts")) {
-                const route = require(`./server/post/${file}`);
+                const route = require(__dirname + `/server/post/${file}`);
                 if (this.usedRoutes.includes(route.default.path)) {
                     console.log(colors.bold(colors.red(`[!]`) + " Duplicate route: " + route.default.path + " at " + file))
                     process.exit(1);
