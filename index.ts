@@ -1,12 +1,13 @@
 import NetCore from "./src/networking";
 import fs from "fs";
 import colors from "colors";
+import process from "process";
 
 export class CHTTPServer {
     private port: number;
     private networking: NetCore;
     private usedRoutes: Array<string> = [];
-
+    
     constructor(port: number) {
         this.port = port;
         this.networking = new NetCore(port);
@@ -15,9 +16,9 @@ export class CHTTPServer {
 
         console.log(colors.bold(colors.blue("Starting CHTTPS Server...")))
 
-        fs.readdirSync(__dirname + "/server/get").forEach((file) => {
+        fs.readdirSync(process.cwd() + "/server/get").forEach((file) => {
             if (file.endsWith(".ts")) {
-                const route = require(__dirname +  `/server/get/${file}`);
+                const route = require(process.cwd() +  `/server/get/${file}`);
                 if (this.usedRoutes.includes(route.default.path)) {
                     console.log(colors.bold(colors.red(`[!]`) + " Duplicate route: " + route.default.path + " at " + file))
                     process.exit(1);
@@ -28,9 +29,9 @@ export class CHTTPServer {
             }
         })
 
-        fs.readdirSync(__dirname + "/server/post").forEach((file) => {
+        fs.readdirSync(process.cwd() + "/server/post").forEach((file) => {
             if (file.endsWith(".ts")) {
-                const route = require(__dirname + `/server/post/${file}`);
+                const route = require(process.cwd() + `/server/post/${file}`);
                 if (this.usedRoutes.includes(route.default.path)) {
                     console.log(colors.bold(colors.red(`[!]`) + " Duplicate route: " + route.default.path + " at " + file))
                     process.exit(1);
