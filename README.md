@@ -1,7 +1,11 @@
+![Bun](https://img.shields.io/badge/Bun-%23000000.svg?style=for-the-badge&logo=bun&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![GitHub repo size](https://img.shields.io/github/repo-size/stuncs69/papaya.js?style=for-the-badge) ![npm package minimized gzipped size (select exports)](https://img.shields.io/bundlejs/size/papaya.js?style=for-the-badge)
+
+
+
 # papaya.js
 Webserver made for TypeScript, using TypeScript.
-
 ```ts
+// index.ts
 import { PapayaServer } from "papaya.js";
 
 const server = new PapayaServer(8080);
@@ -12,7 +16,25 @@ server.use(function testWare(req, res) {
     })
 })
 
+server.config({
+    dynamicPublics: true, // Config is optional.
+})
+
 server.listen();
+
+// ./server/get/index.ts
+import { getPublicFileContents } from "papaya.js";
+
+export default {
+    path: "/",
+    callback: (req: any, res: any, middlewareData: any) => {
+        return new Promise((resolve, reject) => {
+            getPublicFileContents("index.html").then((data) => {
+                resolve(data)
+            })
+        })
+    },
+}
 ```
 
 ## Functionality
