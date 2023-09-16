@@ -4,7 +4,7 @@ import fs from "fs";
 import colors from "colors";
 import process from "process";
 
-class CHTTPServer {
+class PapayaServer {
     private port: number;
     private networking: NetCore;
     private usedRoutes: Array<string> = [];
@@ -15,7 +15,7 @@ class CHTTPServer {
 
         this.networking.addPublics();
 
-        console.log(colors.bold(colors.blue("Starting CHTTPS Server...")))
+        console.log(colors.bold(colors.blue("Starting Papaya.js Server...")))
 
         fs.readdirSync(process.cwd() + "/server/get").forEach((file) => {
             if (file.endsWith(".ts")) {
@@ -53,4 +53,4 @@ class CHTTPServer {
     }
 }
 
-export { CHTTPServer, getPublicFileContents };
+export { PapayaServer, getPublicFileContents };

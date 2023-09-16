@@ -1,10 +1,10 @@
-# chttps
+# Papaya.js
 Webserver made for TypeScript, using TypeScript.
 
 ```ts
-import { CHTTPServer } from "chttps";
+import { PapayaServer } from "Papaya";
 
-const server = new CHTTPServer(8080);
+const server = new PapayaServer(8080);
 
 server.use(function testWare(req, res) {
     return new Promise((resolve, reject) => {

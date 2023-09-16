@@ -1,7 +1,7 @@
 {
-  "name": "chttps.js",
+  "name": "papaya.js",
   "module": "index.ts",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "author": {
     "name": "stuncs69"
   },
@@ -21,9 +21,5 @@
   },
   "scripts": {
     "new-project": ""
-  },
-  "bin": {
-    "@chttps.js/create": "cli.ts",
-    "create-project": "cli.ts"
-}
+  }
 }
