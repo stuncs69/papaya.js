@@ -2,6 +2,13 @@
   "name": "chttps.js",
   "module": "index.ts",
   "version": "0.0.5",
+  "author": {
+    "name": "stuncs69"
+  },
+  "keywords": [
+    "server",
+    "backend"
+  ],
   "type": "module",
   "devDependencies": {
     "bun-types": "latest"
@@ -12,5 +19,11 @@
   "dependencies": {
     "colors": "^1.4.0"
   },
-  "scripts": {}
+  "scripts": {
+    "new-project": ""
+  },
+  "bin": {
+    "@chttps.js/create": "cli.ts",
+    "create-project": "cli.ts"
+}
 }

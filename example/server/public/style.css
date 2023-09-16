@@ -1,3 +1,35 @@
-p {
-    color: red;
+@font-face {
+    font-family: myFirstFont;
+    src: url("/AOTFShinGoProDeBold.woff");
+}
+* {
+    font-family: myFirstFont;
+}
+
+.main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 40rem;
+    background-color: rgba(211, 211, 211, 0.397);
+    border-radius: 3rem;
+    padding: 2rem;
+    width: 40rem;
+    align-items: center;
+    text-align: center;
+}
+
+code {
+    font-family: monospace;
+    background-color: black;
+    color: rgba(211, 211, 211);
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+}
+
+.cat {
+    height: 15rem;
+    align-items: center;
+    border-radius: 0.2rem;
 }

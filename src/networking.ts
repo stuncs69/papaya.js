@@ -67,9 +67,55 @@ export default class NetCore {
                     console.log(color.bold(color.green(`[!]`) + " Added public file: " + files[file]))
                     this.server.on("request", (req, res) => {
                         if (req.method == "GET" && req.url == "/" + files[file]) {
+                            const contentTypes: { [key: string]: string } = {
+                                ttf: "font/ttf",
+                                woff: "font/woff",
+                                woff2: "font/woff2",
+                                eot: "font/eot",
+                                otf: "font/otf",
+                                svg: "image/svg+xml",
+                                png: "image/png",
+                                jpg: "image/jpeg",
+                                ico: "image/x-icon",
+                                gif: "image/gif",
+                                css: "text/css",
+                                js: "text/javascript",
+                                html: "text/html",
+                                txt: "text/plain",
+                                json: "application/json",
+                                pdf: "application/pdf",
+                                mp3: "audio/mpeg",
+                                mp4: "video/mp4",
+                                webm: "video/webm",
+                                xml: "application/xml",
+                                zip: "application/zip",
+                                rar: "application/x-rar-compressed",
+                                tar: "application/x-tar",
+                                "7z": "application/x-7z-compressed",
+                                exe: "application/x-msdownload",
+                                psd: "image/vnd.adobe.photoshop",
+                                ai: "application/postscript",
+                                eps: "application/postscript",
+                                ps: "application/postscript",
+                                doc: "application/msword",
+                                docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                xls: "application/vnd.ms-excel",
+                                xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                ppt: "application/vnd.ms-powerpoint",
+                            };                            
+                            
                             const ext = files[file].split(".")[1];
-                            res.setHeader("Content-Type", `text/${ext}`)
-                            res.end(data.toString());
+                            const contentType = contentTypes[ext];
+                            
+                            if (contentType) {
+                                res.setHeader("Content-Type", contentType);
+                                res.end(data, "binary")
+                            } else {
+                                // Handle unsupported file types or set a default content type
+                                res.setHeader("Content-Type", "text/plain");
+                                res.end("Unsupported file type");
+                            }
+                            
                         }
                     })
                 })
