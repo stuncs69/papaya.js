@@ -1,4 +1,5 @@
 import NetCore from "./src/networking";
+import { getPublicFileContents } from "./src/util";
 import fs from "fs";
 import colors from "colors";
 import process from "process";
@@ -49,5 +50,9 @@ export class CHTTPServer {
 
     use(middleware: (req: any, res: any) => Promise<any>) {
         this.networking.addMiddleware(middleware);
+    }
+
+    getPublicFileContents(path: string): Promise<string> {
+        return getPublicFileContents(path);
     }
 }
