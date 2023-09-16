@@ -1,4 +1,4 @@
-import { getPublicFileContents } from "chttps.js";
+import {  getPublicFileContents } from "../../../src/util"
 
 export default {
     path: "/",

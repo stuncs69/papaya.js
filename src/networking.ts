@@ -13,6 +13,7 @@ export default class NetCore {
     port: number;
     listening: boolean = false;
     private middleware: Array<Function> = [];
+    private paths: Array<string> = [];
 
     constructor(port: number) {
         this.connections = []
@@ -31,9 +32,10 @@ export default class NetCore {
         }
         return middlewareData;
     }
-    
 
     addGet(path: string, callback: Function) {
+        if (this.paths.includes(path)) return;
+        this.paths.push(path);
         this.server.on("request", async (req, res) => {
             if (req.method == "GET" && req.url == path) {
                 console.log(color.bold(color.green(`[!]`) + " GET request at " + path))
@@ -47,6 +49,8 @@ export default class NetCore {
     }
 
     addPost(path: string, callback: Function) {
+        if (this.paths.includes(path)) return;
+        this.paths.push(path);
         this.server.on("request", async (req, res) => {
             if (req.method == "POST" && req.url == path) {
                 console.log(color.bold(color.green(`[!]`) + " POST request at " + path))
@@ -58,66 +62,85 @@ export default class NetCore {
         })
     }
     
-    addPublics() {
+    private returnMimeType(ext: string): string {
+        const contentTypes: { [key: string]: string } = {
+            ttf: "font/ttf",
+            woff: "font/woff",
+            woff2: "font/woff2",
+            eot: "font/eot",
+            otf: "font/otf",
+            svg: "image/svg+xml",
+            png: "image/png",
+            jpg: "image/jpeg",
+            ico: "image/x-icon",
+            gif: "image/gif",
+            css: "text/css",
+            js: "text/javascript",
+            html: "text/html",
+            txt: "text/plain",
+            json: "application/json",
+            pdf: "application/pdf",
+            mp3: "audio/mpeg",
+            mp4: "video/mp4",
+            webm: "video/webm",
+            xml: "application/xml",
+            zip: "application/zip",
+            rar: "application/x-rar-compressed",
+            tar: "application/x-tar",
+            "7z": "application/x-7z-compressed",
+            exe: "application/x-msdownload",
+            psd: "image/vnd.adobe.photoshop",
+            ai: "application/postscript",
+            eps: "application/postscript",
+            ps: "application/postscript",
+            doc: "application/msword",
+            docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            xls: "application/vnd.ms-excel",
+            xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ppt: "application/vnd.ms-powerpoint",
+        };                            
+        
+        const contentType = contentTypes[ext];
+        
+        if (contentType) {
+            return contentType;
+        } else {
+            // Handle unsupported file types or set a default content type
+            return "text/plain";
+        }
+    }
+
+    addStaticPublics() {
         fs.readdir("./server/public/", (err, files: Array<String>) => {
             if (err) throw err;
             for (const file in files) {
-                fs.readFile(`./server/public/${files[file]}`, (err, data) => {
+                fs.readFile(process.cwd() + `/server/public/${files[file]}`, (err, data) => {
                     if (err) throw err;
                     console.log(color.bold(color.green(`[!]`) + " Added public file: " + files[file]))
                     this.server.on("request", (req, res) => {
                         if (req.method == "GET" && req.url == "/" + files[file]) {
-                            const contentTypes: { [key: string]: string } = {
-                                ttf: "font/ttf",
-                                woff: "font/woff",
-                                woff2: "font/woff2",
-                                eot: "font/eot",
-                                otf: "font/otf",
-                                svg: "image/svg+xml",
-                                png: "image/png",
-                                jpg: "image/jpeg",
-                                ico: "image/x-icon",
-                                gif: "image/gif",
-                                css: "text/css",
-                                js: "text/javascript",
-                                html: "text/html",
-                                txt: "text/plain",
-                                json: "application/json",
-                                pdf: "application/pdf",
-                                mp3: "audio/mpeg",
-                                mp4: "video/mp4",
-                                webm: "video/webm",
-                                xml: "application/xml",
-                                zip: "application/zip",
-                                rar: "application/x-rar-compressed",
-                                tar: "application/x-tar",
-                                "7z": "application/x-7z-compressed",
-                                exe: "application/x-msdownload",
-                                psd: "image/vnd.adobe.photoshop",
-                                ai: "application/postscript",
-                                eps: "application/postscript",
-                                ps: "application/postscript",
-                                doc: "application/msword",
-                                docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                                xls: "application/vnd.ms-excel",
-                                xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                                ppt: "application/vnd.ms-powerpoint",
-                            };                            
-                            
-                            const ext = files[file].split(".")[1];
-                            const contentType = contentTypes[ext];
-                            
-                            if (contentType) {
-                                res.setHeader("Content-Type", contentType);
-                                res.end(data, "binary")
-                            } else {
-                                // Handle unsupported file types or set a default content type
-                                res.setHeader("Content-Type", "text/plain");
-                                res.end("Unsupported file type");
-                            }
-                            
+                            res.setHeader("Content-Type", this.returnMimeType(files[file].split(".")[1]))
+                            res.end(data, "binary");
                         }
                     })
+                })
+            }
+        })
+    }
+
+    runDynamicPublics() {
+        this.server.on("request", (req, res) => {
+            if (req.method == "GET") {
+                console.log(color.bold(color.green(`[!]`) + " GET request at " + req.url))
+                if (this.paths.includes(req.url as string)) return;
+                fs.readFile(process.cwd() + `/server/public/${req.url}`, (err, data) => {
+                    if (err) {
+                        res.statusCode = 404;
+                        res.end("404 Not Found");
+                    } else {
+                        res.setHeader("Content-Type", this.returnMimeType((req.url as string).split(".")[1]))
+                        res.end(data, "binary");
+                    }
                 })
             }
         })
@@ -131,5 +154,6 @@ export default class NetCore {
     listen() {
         this.server.listen(this.port);
         this.listening = true;
+        console.log(color.bold(color.blue("Papaya.js Server is listening on port " + this.port)))
     }
 }

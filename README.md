@@ -1,4 +1,4 @@
-# Papaya.js
+# papaya.js
 Webserver made for TypeScript, using TypeScript.
 
 ```ts
@@ -23,6 +23,21 @@ server.listen();
     - Public files are served asynchronously alongside coded paths.
     - Easy filesystem layout instead of spaghetti-code files.
 
+# Initiate a new project
+To initiate a new project, make a new directory:
+```
+$ mkdir papaya-project
+$ cd papaya-project
+```
+Set-up a new project using NPM:
+```
+$ npm create papaya@latest
+```
+Run your brand new project:
+```
+$ bun index.ts
+```
+Due to the nature of the framework, you can exclusively use [Bun](https://bun.sh/) for now.
 ## File structure
 - 📁 server
     - 📁 get - GET endpoint controller files.

@@ -4,17 +4,26 @@ import fs from "fs";
 import colors from "colors";
 import process from "process";
 
+interface Settings {
+    dynamicPublics: boolean,
+}
+
 class PapayaServer {
-    private port: number;
-    private networking: NetCore;
+    private networking: any;
     private usedRoutes: Array<string> = [];
+    private configuration: Settings = {
+        dynamicPublics: false,
+    };
     
     constructor(port: number) {
-        this.port = port;
         this.networking = new NetCore(port);
+    }
 
-        this.networking.addPublics();
+    config(configuration: Settings) {
+        this.configuration = configuration;
+    }
 
+    listen() {
         console.log(colors.bold(colors.blue("Starting Papaya.js Server...")))
 
         fs.readdirSync(process.cwd() + "/server/get").forEach((file) => {
@@ -42,9 +51,12 @@ class PapayaServer {
                 console.log(colors.bold(colors.green(`[!]`) + " Added POST route: " + route.default.path))
             }
         })
-    }
 
-    listen() {
+        if (this.configuration.dynamicPublics) {
+            this.networking.runDynamicPublics();
+        } else {
+            this.networking.addStaticPublics();
+        }
         this.networking.listen();
     }
 
