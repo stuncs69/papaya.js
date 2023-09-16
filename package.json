@@ -1,7 +1,7 @@
 {
   "name": "chttps.js",
   "module": "index.ts",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "type": "module",
   "devDependencies": {
     "bun-types": "latest"

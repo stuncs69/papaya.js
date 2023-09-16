@@ -4,7 +4,7 @@ import fs from "fs";
 import colors from "colors";
 import process from "process";
 
-export class CHTTPServer {
+class CHTTPServer {
     private port: number;
     private networking: NetCore;
     private usedRoutes: Array<string> = [];
@@ -51,8 +51,6 @@ export class CHTTPServer {
     use(middleware: (req: any, res: any) => Promise<any>) {
         this.networking.addMiddleware(middleware);
     }
-
-    getPublicFileContents(path: string): Promise<string> {
-        return getPublicFileContents(path);
-    }
 }
+
+export { CHTTPServer, getPublicFileContents };
