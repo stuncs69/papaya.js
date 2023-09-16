@@ -2,7 +2,7 @@
 Webserver made for TypeScript, using TypeScript.
 
 ```ts
-import { PapayaServer } from "Papaya";
+import { PapayaServer } from "papaya.js";
 
 const server = new PapayaServer(8080);
 
