@@ -1,4 +1,4 @@
-import { PapayaConfig } from "papaya.js";
+import { PapayaConfig } from "..";
 
 export default class Config extends PapayaConfig {
     constructor() {

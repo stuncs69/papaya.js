@@ -1,7 +1,6 @@
 {
   "name": "papaya.js",
   "module": "index.ts",
-  "version": "0.0.9",
   "author": {
     "name": "stuncs69"
   },
@@ -18,7 +17,8 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "colors": "^1.4.0"
+    "colors": "^1.4.0",
+    "papaya.js": "^0.0.9"
   },
   "scripts": {
     "new-project": ""

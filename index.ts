@@ -35,7 +35,7 @@ class PapayaServer {
         this.networking = new NetCore(port);
         const config = require(process.cwd() + "/config.papaya.ts");
         if (config.default) {
-            this.configuration = config.default.getConfiguration();
+            this.configuration = new config.default().getConfiguration();
         } else {
             console.log(colors.bold(colors.red(`[!]`) + " No config.papaya.ts file found!"))
             process.exit(1);
