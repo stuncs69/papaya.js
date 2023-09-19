@@ -8,6 +8,22 @@ interface Settings {
     dynamicPublics: boolean,
 }
 
+class PapayaConfig {
+    configuration: Settings = {
+        dynamicPublics: false,
+    };
+
+    constructor() {}
+
+    config(configuration: Settings) {
+        this.configuration = configuration;
+    }
+
+    getConfiguration() {
+        return this.configuration;
+    }
+}
+
 class PapayaServer {
     private networking: any;
     private usedRoutes: Array<string> = [];
@@ -17,10 +33,13 @@ class PapayaServer {
     
     constructor(port: number) {
         this.networking = new NetCore(port);
-    }
-
-    config(configuration: Settings) {
-        this.configuration = configuration;
+        const config = require(process.cwd() + "/config.papaya.ts");
+        if (config.default) {
+            this.configuration = config.default.getConfiguration();
+        } else {
+            console.log(colors.bold(colors.red(`[!]`) + " No config.papaya.ts file found!"))
+            process.exit(1);
+        }
     }
 
     listen() {
@@ -65,4 +84,4 @@ class PapayaServer {
     }
 }
 
-export { PapayaServer, getPublicFileContents };
+export { PapayaServer, getPublicFileContents, PapayaConfig };

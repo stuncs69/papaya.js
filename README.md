@@ -16,10 +16,6 @@ server.use(function testWare(req, res) {
     })
 })
 
-server.config({
-    dynamicPublics: true, // Config is optional.
-})
-
 server.listen();
 
 // ./server/get/index.ts
