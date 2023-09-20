@@ -6,11 +6,15 @@ import process from "process";
 
 interface Settings {
     dynamicPublics: boolean,
+    allowClasses?: boolean,
+    port: number,
 }
 
 class PapayaConfig {
     configuration: Settings = {
         dynamicPublics: false,
+        allowClasses: false,
+        port: 8080,
     };
 
     constructor() {}
@@ -24,15 +28,21 @@ class PapayaConfig {
     }
 }
 
+class PapayaRoute {
+    path: string = "";
+    callback: (req: any, res: any) => Promise<any> = async (req, res) => {console.log("No callback!")};
+}
+
 class PapayaServer {
     private networking: any;
     private usedRoutes: Array<string> = [];
     private configuration: Settings = {
         dynamicPublics: false,
+        port: 8080,
+        allowClasses: false,
     };
     
-    constructor(port: number) {
-        this.networking = new NetCore(port);
+    constructor() {
         const config = require(process.cwd() + "/config.papaya.ts");
         if (config.default) {
             this.configuration = new config.default().getConfiguration();
@@ -40,34 +50,73 @@ class PapayaServer {
             console.log(colors.bold(colors.red(`[!]`) + " No config.papaya.ts file found!"))
             process.exit(1);
         }
+        this.networking = new NetCore(this.configuration.port);
     }
 
     listen() {
+        this.networking = new NetCore(this.configuration.port);
+
         console.log(colors.bold(colors.blue("Starting Papaya.js Server...")))
 
         fs.readdirSync(process.cwd() + "/server/get").forEach((file) => {
             if (file.endsWith(".ts")) {
                 const route = require(process.cwd() +  `/server/get/${file}`);
-                if (this.usedRoutes.includes(route.default.path)) {
-                    console.log(colors.bold(colors.red(`[!]`) + " Duplicate route: " + route.default.path + " at " + file))
-                    process.exit(1);
+                if (this.configuration.allowClasses) {
+                    const x = new route.default();
+
+                    if (x.path && x.callback) {
+                        if (this.usedRoutes.includes(x.path)) {
+                            console.log(colors.bold(colors.red(`[!]`) + " Duplicate route: " + x.path + " at " + file))
+                            process.exit(1);
+                        }
+                        this.usedRoutes.push(x.path)
+                        this.networking.addGet(x.path, x.callback)
+                        console.log(colors.bold(colors.green(`[!]`) + " Added GET route: " + x.path))
+                    } else {
+                        console.log(colors.bold(colors.red(`[!]`) + " Invalid route: " + file))
+                        process.exit(1);
+                    }
+                } else {
+                    if (this.usedRoutes.includes(route.default.path)) {
+                        console.log(colors.bold(colors.red(`[!]`) + " Duplicate route: " + route.default.path + " at " + file))
+                        process.exit(1);
+                    }
+                    this.usedRoutes.push(route.default.path)
+                    this.networking.addGet(route.default.path, route.default.callback)
+                    console.log(colors.bold(colors.green(`[!]`) + " Added GET route: " + route.default.path))                    
                 }
-                this.usedRoutes.push(route.default.path)
-                this.networking.addGet(route.default.path, route.default.callback)
-                console.log(colors.bold(colors.green(`[!]`) + " Added GET route: " + route.default.path))
+
             }
         })
 
         fs.readdirSync(process.cwd() + "/server/post").forEach((file) => {
             if (file.endsWith(".ts")) {
-                const route = require(process.cwd() + `/server/post/${file}`);
-                if (this.usedRoutes.includes(route.default.path)) {
-                    console.log(colors.bold(colors.red(`[!]`) + " Duplicate route: " + route.default.path + " at " + file))
-                    process.exit(1);
+                const route = require(process.cwd() +  `/server/get/${file}`);
+                if (this.configuration.allowClasses) {
+                    const x = new route();
+
+                    if (x.path && x.callback) {
+                        if (this.usedRoutes.includes(x.path)) {
+                            console.log(colors.bold(colors.red(`[!]`) + " Duplicate route: " + x.path + " at " + file))
+                            process.exit(1);
+                        }
+                        this.usedRoutes.push(x.path)
+                        this.networking.addPost(x.path, x.callback)
+                        console.log(colors.bold(colors.green(`[!]`) + " Added POST route: " + x.path))
+                    } else {
+                        console.log(colors.bold(colors.red(`[!]`) + " Invalid route: " + file))
+                        process.exit(1);
+                    }
+                } else {
+                    if (this.usedRoutes.includes(route.default.path)) {
+                        console.log(colors.bold(colors.red(`[!]`) + " Duplicate route: " + route.default.path + " at " + file))
+                        process.exit(1);
+                    }
+                    this.usedRoutes.push(route.default.path)
+                    this.networking.addPost(route.default.path, route.default.callback)
+                    console.log(colors.bold(colors.green(`[!]`) + " Added POST route: " + route.default.path))                    
                 }
-                this.usedRoutes.push(route.default.path)
-                this.networking.addPost(route.default.path, route.default.callback)
-                console.log(colors.bold(colors.green(`[!]`) + " Added POST route: " + route.default.path))
+
             }
         })
 
@@ -84,4 +133,4 @@ class PapayaServer {
     }
 }
 
-export { PapayaServer, getPublicFileContents, PapayaConfig };
+export { PapayaServer, getPublicFileContents, PapayaConfig, PapayaRoute };

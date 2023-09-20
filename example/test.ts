@@ -1,6 +1,6 @@
 import { PapayaServer } from "../index";
 
-const server = new PapayaServer(8080);
+const server = new PapayaServer();
 
 server.use((req, res) => {
     console.log("Middleware!")

@@ -1,12 +1,11 @@
 import {  getPublicFileContents } from "../../../src/util"
+import { PapayaRoute } from "../../.."
 
-export default {
-    path: "/",
-    callback: (req: any, res: any, middlewareData: any) => {
-        return new Promise((resolve, reject) => {
-            getPublicFileContents("index.html").then((data) => {
-                resolve(data)
-            })
+export default class GetIndex extends PapayaRoute {
+    path = "/";
+    callback = () => {
+        return new Promise((resolve) => {
+            resolve(getPublicFileContents("index.html"));
         })
-    },
+    };
 }

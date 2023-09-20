@@ -5,6 +5,8 @@ export default class Config extends PapayaConfig {
         super();
         this.configuration = {
             dynamicPublics: false,
+            port: 3000,
+            allowClasses: true,
         }
     }
 }
