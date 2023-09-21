@@ -1,15 +1,5 @@
 import fs from "fs";
 
-interface Request {
-    request: {
-        url: string,
-        method: string,
-        headers: {
-            [key: string]: string
-        }
-    },
-}
-
 function getPublicFileContents(path: string): Promise<string> {
     return new Promise((resolve, reject) => {
         fs.readFile(process.cwd() + "/server/public/" + path, (err, data) => {

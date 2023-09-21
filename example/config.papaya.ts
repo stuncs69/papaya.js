@@ -1,12 +1,13 @@
 import { PapayaConfig } from "..";
+import { Settings } from "../src/interfaces";
 
 export default class Config extends PapayaConfig {
-    constructor() {
-        super();
-        this.configuration = {
-            dynamicPublics: false,
-            port: 3000,
-            allowClasses: true,
-        }
+    configuration: Settings = {
+        dynamicPublics: false,
+        allowClasses: true,
+        port: 3000,
+    }
+    logic() {
+        console.log("Config loaded!")
     }
 }

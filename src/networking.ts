@@ -1,7 +1,4 @@
-interface Connection {
-    IP: string,
-    ID: string,
-}
+import { Connection } from "./interfaces";
 
 import https from "https";
 import color from 'colors';

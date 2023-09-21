@@ -3,35 +3,8 @@ import { getPublicFileContents } from "./src/util";
 import fs from "fs";
 import colors from "colors";
 import process from "process";
-
-interface Settings {
-    dynamicPublics: boolean,
-    allowClasses?: boolean,
-    port: number,
-}
-
-class PapayaConfig {
-    configuration: Settings = {
-        dynamicPublics: false,
-        allowClasses: false,
-        port: 8080,
-    };
-
-    constructor() {}
-
-    config(configuration: Settings) {
-        this.configuration = configuration;
-    }
-
-    getConfiguration() {
-        return this.configuration;
-    }
-}
-
-class PapayaRoute {
-    path: string = "";
-    callback: (req: any, res: any) => Promise<any> = async (req, res) => {console.log("No callback!")};
-}
+import { Settings } from "./src/interfaces";
+import { PapayaConfig, PapayaRoute } from "./src/classes";
 
 class PapayaServer {
     private networking: any;
@@ -45,7 +18,9 @@ class PapayaServer {
     constructor() {
         const config = require(process.cwd() + "/config.papaya.ts");
         if (config.default) {
-            this.configuration = new config.default().getConfiguration();
+            let configClass = new config.default();
+            configClass.logic();
+            this.configuration = configClass.getConfiguration();
         } else {
             console.log(colors.bold(colors.red(`[!]`) + " No config.papaya.ts file found!"))
             process.exit(1);
