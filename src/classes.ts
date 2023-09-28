@@ -93,7 +93,7 @@ class PapayaServer {
             if (file.endsWith(".ts")) {
                 const route = require(process.cwd() +  `/server/post/${file}`);
                 if (this.configuration.allowClasses) {
-                    const x = new route();
+                    const x = new route.default();
 
                     if (x.path && x.callback) {
                         if (this.usedRoutes.includes(x.path)) {
