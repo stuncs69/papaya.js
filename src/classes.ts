@@ -91,7 +91,7 @@ class PapayaServer {
 
         fs.readdirSync(process.cwd() + "/server/post").forEach((file) => {
             if (file.endsWith(".ts")) {
-                const route = require(process.cwd() +  `/server/get/${file}`);
+                const route = require(process.cwd() +  `/server/post/${file}`);
                 if (this.configuration.allowClasses) {
                     const x = new route();
 
