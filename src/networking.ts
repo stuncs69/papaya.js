@@ -34,7 +34,7 @@ export default class NetCore {
         if (this.paths.includes(path)) return;
         this.paths.push(path);
         this.server.on("request", async (req, res) => {
-            if (req.method == "GET" && req.url == path) {
+            if (req.method == "GET" && req.url?.split("?")[0] == path) {
                 console.log(color.bold(color.green(`[!]`) + " GET request at " + path))
                 const middlewareData = await this.runMiddleware(req, res, this.middleware);
                 callback(req, res, middlewareData).then((data: any) => {
@@ -129,7 +129,7 @@ export default class NetCore {
         this.server.on("request", (req, res) => {
             if (req.method == "GET") {
                 console.log(color.bold(color.green(`[!]`) + " GET request at " + req.url))
-                if (this.paths.includes(req.url as string)) return;
+                if (this.paths.includes(req.url?.split("?")[0] as string)) return;
                 fs.readFile(process.cwd() + `/server/public/${req.url}`, (err, data) => {
                     if (err) {
                         res.statusCode = 404;

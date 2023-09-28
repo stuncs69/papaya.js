@@ -11,7 +11,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 40rem;
+    height: min-content;
     background-color: rgba(211, 211, 211, 0.397);
     border-radius: 3rem;
     padding: 2rem;
@@ -32,4 +32,27 @@ code {
     height: 14rem;
     align-items: center;
     border-radius: 0.2rem;
+}
+
+form > input[type="text"] {
+    border: none;
+    padding: 0.5rem;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    width: 20rem;
+}
+
+form > input[type="submit"] {
+    border: none;
+    background-color: #FF9800;
+    transition: 300ms;
+    padding: 0.5rem;
+    width: 21rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+form > input[type="submit"]:hover {
+    background-color: #FF8000;
+    cursor: pointer;
 }

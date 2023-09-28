@@ -3,7 +3,7 @@ import { Settings } from "../src/interfaces";
 
 export default class Config extends PapayaConfig {
     configuration: Settings = {
-        dynamicPublics: false,
+        dynamicPublics: true,
         allowClasses: true,
         port: 3000,
     }

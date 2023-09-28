@@ -1,0 +1,64 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url("/AOTFShinGoProDeBold.woff");
+}
+* {
+    font-family: myFirstFont;
+}
+
+.main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: min-content;
+    background-color: rgba(211, 211, 211, 0.397);
+    padding: 2rem;
+    width: 60rem;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1rem solid #FF8000;
+}
+
+code {
+    font-family: monospace;
+    background-color: black;
+    color: rgba(211, 211, 211);
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+}
+
+pre {
+    text-align: left;
+    width: 90%;
+    background-color: black;
+    height: fit-content;
+    color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    font-family: monospace;
+}
+
+pre > * {
+    font-family: monospace;
+}
+
+.red {
+    color: lightcoral;
+}
+
+.blue {
+    color: lightblue;
+}
+
+.purple {
+    color: violet;
+}
+
+.yellow {
+    color: lightgoldenrodyellow;
+}
+
+.comment {
+    color: gray;
+}

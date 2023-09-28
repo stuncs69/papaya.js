@@ -1,4 +1,4 @@
-import { getPublicFileContents } from "./src/util";
+import { renderEJS, renderPublic, extractGetParameters } from "./src/util";
 import { PapayaConfig, PapayaRoute, PapayaServer } from "./src/classes";
 
-export { PapayaServer, getPublicFileContents, PapayaConfig, PapayaRoute };
+export { PapayaServer, renderEJS, renderPublic, PapayaConfig, PapayaRoute, extractGetParameters };
