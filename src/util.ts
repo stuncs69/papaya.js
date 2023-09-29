@@ -29,4 +29,16 @@ function extractGetParameters(request: Request): any {
     return getParams;
 }
 
-export { renderPublic, renderEJS, extractGetParameters }
+function getPostBody(request: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+        let body = {};
+        request.on("data", (data: any) => {
+            body = JSON.parse(data.toString());
+        })
+        request.on("end", () => {
+            resolve(body);
+        })
+    })
+}
+
+export { renderPublic, renderEJS, extractGetParameters, getPostBody }
