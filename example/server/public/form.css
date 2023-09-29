@@ -62,3 +62,14 @@ pre > * {
 .comment {
     color: gray;
 }
+
+#container {
+    min-height: 20rem;
+    text-align: left;
+    font-family: monospace;
+}
+
+#container > * {
+    text-align: start;
+    font-family: monospace !important;
+}

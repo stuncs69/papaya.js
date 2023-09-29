@@ -5,44 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hi <%= name %>!</title>
     <link rel="stylesheet" href="form.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs/loader.min.js"></script>
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
 </head>
 <body>
     <div class="main">
         <h1>Welcome, <%= name %>!</h1>
         <hr>
         <p>Papaya.js supports <a href="https://ejs.co/">EJS</a> out of the box. Kickstart your new project with <code>GET</code> parameters and EJS, like in this example.</p><br>
-        <pre>
-<span class="comment">// Import necessary modules</span>
-<span class="red">import</span> { 
-    <span class="purple">renderEJS</span>, 
-    <span class="blue">extractGetParameters</span>, 
-    <span class="blue">PapayaRoute</span> 
-} <span class="red">from</span> "<span class="green">papaya.js</span>";
-
-<span class="comment">// Define the GetForm class extending PapayaRoute</span>
-<span class="purple">export default</span> <span class="red">class</span> <span class="blue">GetForm</span> <span class="red">extends</span> <span class="blue">PapayaRoute</span> {
-    <span class="comment">// Define the route path</span>
-    <span class="yellow">path</span> = "<span class="orange">/form</span>";
-
-    <span class="comment">// Define the callback function for handling requests</span>
-    <span class="yellow">callback</span> = (request: Request) => {
-        <span class="comment">// Return a Promise to handle the request asynchronously</span>
-        <span class="red">return</span> <span class="blue">new</span> <span class="green">Promise</span>((resolve) => {
-            <span class="comment">// Extract GET parameters from the request</span>
-            let <span class="purple">getParams</span> = <span class="blue">extractGetParameters</span>(request);
-            
-            <span class="comment">// Log the extracted parameters for debugging</span>
-            console.log(<span class="purple">getParams</span>);
-            
-            <span class="comment">// Render the EJS template with the extracted parameters</span>
-            <span class="purple">renderEJS</span>("form.ejs", <span class="purple">getParams</span>).then((html) => {
-                <span class="comment">// Resolve the Promise with the rendered HTML</span>
-                resolve(html);
-            });
-        });
-    };
-}
-        </pre>  
+        <div id="container">
+        </div>
     </div>
+    <script>
+        // require is provided by loader.min.js.
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs' }});
+        require(["vs/editor/editor.main"], () => {
+          monaco.editor.create(document.getElementById('container'), {
+            value: `
+import { renderEJS, extractGetParameters, PapayaRoute } from "papaya.js";
+
+export default class GetForm extends PapayaRoute {
+    path = "/form";
+    callback = (request: Request) => {
+        return new Promise((resolve) => {
+            let getParams = extractGetParameters(request);
+            console.log(getParams);
+            renderEJS("form.ejs", getParams).then((html) => {
+                resolve(html);
+            })
+        })
+    };
+}`,
+            language: 'typescript',
+            theme: 'vs-dark',
+            readOnly: true,
+          });
+        });
+        </script>
 </body>
 </html>
