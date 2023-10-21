@@ -4,6 +4,9 @@ import https from "https";
 import color from 'colors';
 import fs from "fs";
 
+/**
+ * Networking core for internal networking handling.
+ */
 export default class NetCore {
     private connections: Array<Connection>;
     private server: https.Server;
@@ -17,6 +20,14 @@ export default class NetCore {
         this.server = https.createServer();
         this.port = port;
     }
+    
+    /**
+     * ## Run middleware and return data
+     * @param req 
+     * @param res 
+     * @param middleware 
+     * @returns 
+     */
     private async runMiddleware(req: https.IncomingMessage, res: https.ServerResponse, middleware: Array<Function>) {
         let middlewareData: { [key: string]: any } = {};
         for (const middlewareItem of middleware) {
@@ -30,6 +41,12 @@ export default class NetCore {
         return middlewareData;
     }
 
+    /**
+     * ## Add a GET route
+     * @param path 
+     * @param callback 
+     * @returns 
+     */
     addGet(path: string, callback: Function) {
         if (this.paths.includes(path)) return;
         this.paths.push(path);
@@ -45,6 +62,12 @@ export default class NetCore {
         })
     }
 
+    /**
+     * ## Add a POST route
+     * @param path 
+     * @param callback 
+     * @returns 
+     */
     addPost(path: string, callback: Function) {
         if (this.paths.includes(path)) return;
         this.paths.push(path);
@@ -59,6 +82,11 @@ export default class NetCore {
         })
     }
     
+    /**
+     * ## Return the MIME type of a file
+     * @param ext 
+     * @returns 
+     */
     private returnMimeType(ext: string): string {
         const contentTypes: { [key: string]: string } = {
             ttf: "font/ttf",
@@ -107,6 +135,9 @@ export default class NetCore {
         }
     }
 
+    /**
+     * ## Add static public files
+     */
     addStaticPublics() {
         fs.readdir("./server/public/", (err, files: Array<String>) => {
             if (err) throw err;
@@ -125,6 +156,9 @@ export default class NetCore {
         })
     }
 
+    /**
+     * ## Run dynamic public files
+     */
     runDynamicPublics() {
         this.server.on("request", (req, res) => {
             if (req.method == "GET") {
@@ -143,11 +177,17 @@ export default class NetCore {
         })
     }
 
+    /**
+     * @param middleware The function with the middleware to use.
+     */
     addMiddleware(middleware: (req: any, res: any) => Promise<void>) {
         this.middleware.push(middleware);
         console.log(color.bold(color.green(`[!]`) + " Added middleware: " + middleware.name))
     }    
 
+    /**
+     * ## Start listening
+     */
     listen() {
         this.server.listen(this.port);
         this.listening = true;

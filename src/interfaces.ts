@@ -9,7 +9,6 @@ interface Connection {
     ID: string,
 }
 
-
 interface Request {
     request: {
         url: string,

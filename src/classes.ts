@@ -3,6 +3,23 @@ import colors from "colors";
 import NetCore from "./networking"
 import fs from "fs"
 
+/**
+ * The class used to configure your Papaya.js server.
+ * ```ts
+import { PapayaConfig, Settings } from "papaya.js";
+
+export default class Config extends PapayaConfig {
+    configuration: Settings = {
+        dynamicPublics: true,
+        allowClasses: true,
+        port: 3000,
+    }
+    logic() {
+        console.log("Config loaded!")
+    }
+}
+ * ```
+ */
 class PapayaConfig {
     configuration: Settings = {
         dynamicPublics: false,
@@ -25,12 +42,31 @@ class PapayaConfig {
     }
 }
 
+/**
+ * The class used to create routes. This is what you will use to create routes.
+ * ```ts
+export default class GetIndex extends PapayaRoute {
+    path = "/";
+    callback = () => {
+        return new Promise((resolve) => {
+            resolve(renderPublic("index.html"));
+        })
+    };
+}
+ * ```
+ */
 class PapayaRoute {
     path: string = "";
     callback: (req: any, res: any) => Promise<any> = async (req, res) => {console.log("No callback!")};
 }
 
-
+/**
+ * The main class of Papaya.js. This is what you will use to start your server.
+ * ```ts
+ * import { PapayaServer } from "papaya.js";
+ * const server = new PapayaServer();
+ * ```
+ */
 class PapayaServer {
     private networking: any;
     private usedRoutes: Array<string> = [];
@@ -53,6 +89,9 @@ class PapayaServer {
         this.networking = new NetCore(this.configuration.port);
     }
 
+    /**
+     * Starts the server.
+     */
     listen() {
         this.networking = new NetCore(this.configuration.port);
 
@@ -128,6 +167,11 @@ class PapayaServer {
         this.networking.listen();
     }
 
+    /**
+     * 
+     * @param middleware The function with the middleware to use.
+     * ## Make sure to use promises!
+     */
     use(middleware: (req: any, res: any) => Promise<any>) {
         this.networking.addMiddleware(middleware);
     }
