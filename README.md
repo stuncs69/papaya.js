@@ -8,7 +8,7 @@ Webserver made for TypeScript, using TypeScript.
 // index.ts
 import { PapayaServer } from "papaya.js";
 
-const server = new PapayaServer(8080);
+const server = new PapayaServer();
 
 server.use(function testWare(req, res) {
     return new Promise((resolve, reject) => {
@@ -19,17 +19,15 @@ server.use(function testWare(req, res) {
 server.listen();
 
 // ./server/get/index.ts
-import { getPublicFileContents } from "papaya.js";
+import {  renderPublic, PapayaRoute } from "papaya.j"
 
-export default {
-    path: "/",
-    callback: (req: any, res: any, middlewareData: any) => {
-        return new Promise((resolve, reject) => {
-            getPublicFileContents("index.html").then((data) => {
-                resolve(data)
-            })
+export default class GetIndex extends PapayaRoute {
+    path = "/";
+    callback = () => {
+        return new Promise((resolve) => {
+            resolve(renderPublic("index.html"));
         })
-    },
+    };
 }
 ```
 
