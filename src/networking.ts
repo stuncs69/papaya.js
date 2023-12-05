@@ -182,6 +182,7 @@ export default class NetCore {
      */
     addMiddleware(middleware: (req: any, res: any) => Promise<void>) {
         this.middleware.push(middleware);
+        console.log(this.middleware)
         console.log(color.bold(color.green(`[!]`) + " Added middleware: " + middleware.name))
     }    
 

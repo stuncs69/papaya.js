@@ -1,6 +1,5 @@
 import { PapayaRoute } from "../../..";
 import { getPostBody } from "../../../src/util";
-import https from "https";
 
 export default class ApiRoute extends PapayaRoute {
     path = "/api";

@@ -93,7 +93,6 @@ class PapayaServer {
      * Starts the server.
      */
     listen() {
-        this.networking = new NetCore(this.configuration.port);
 
         console.log(colors.bold(colors.blue("Starting Papaya.js Server...")))
 
