@@ -4,12 +4,21 @@
 
 # papaya.js
 Webserver made for TypeScript, using TypeScript.
+
+## 💯 What's new?
+🔥 Dynamic paths<br>
+🐶 Pug SSR support<br>
+👏 Split classes in files for easier maintainability<br>
+
+## Usage
+
 ```ts
 // index.ts
 import { PapayaServer } from "papaya.js";
 
 const server = new PapayaServer();
 
+// Middleware
 server.use(function testWare(req, res) {
     return new Promise((resolve, reject) => {
         resolve("TestData")

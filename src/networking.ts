@@ -1,5 +1,5 @@
 import { Connection } from "./interfaces";
-
+import { DynamicEngine } from "./classes/dynamicengine"
 import https from "https";
 import color from 'colors';
 import fs from "fs";
@@ -14,6 +14,7 @@ export default class NetCore {
     listening: boolean = false;
     private middleware: Array<Function> = [];
     private paths: Array<string> = [];
+    private functions: Array<{name: string, fn: Function}> = [];
 
     constructor(port: number) {
         this.connections = []
@@ -28,6 +29,7 @@ export default class NetCore {
      * @param middleware 
      * @returns 
      */
+    //@ts-ignore
     private async runMiddleware(req: https.IncomingMessage, res: https.ServerResponse, middleware: Array<Function>) {
         let middlewareData: { [key: string]: any } = {};
         for (const middlewareItem of middleware) {
@@ -50,11 +52,17 @@ export default class NetCore {
     addGet(path: string, callback: Function) {
         if (this.paths.includes(path)) return;
         this.paths.push(path);
+        this.functions.push({
+            name: path,
+            fn: callback
+        })
         this.server.on("request", async (req, res) => {
             if (req.method == "GET" && req.url?.split("?")[0] == path) {
                 console.log(color.bold(color.green(`[!]`) + " GET request at " + path))
+                let dynamicPathQuery = new DynamicEngine().matchDynamicPaths(this.paths, path)
                 const middlewareData = await this.runMiddleware(req, res, this.middleware);
-                callback(req, res, middlewareData).then((data: any) => {
+                //@ts-expect-error
+                callback(req, res, middlewareData, dynamicPathQuery[Object.keys(dynamicPathQuery)[0]]).then((data: any) => {
                     res.setHeader("Content-Type", "text/html")
                     res.end(data.toString());
                 });;
@@ -71,11 +79,17 @@ export default class NetCore {
     addPost(path: string, callback: Function) {
         if (this.paths.includes(path)) return;
         this.paths.push(path);
+        this.functions.push({
+            name: path,
+            fn: callback
+        })
         this.server.on("request", async (req, res) => {
             if (req.method == "POST" && req.url == path) {
                 console.log(color.bold(color.green(`[!]`) + " POST request at " + path))
+                let dynamicPathQuery = new DynamicEngine().matchDynamicPaths(this.paths, path)
                 const middlewareData = await this.runMiddleware(req, res, this.middleware);
-                callback(req, res, middlewareData).then((data: any) => {
+                //@ts-ignore
+                callback(req, res, middlewareData, dynamicPathQuery[Object.keys(dynamicPathQuery)[0]]).then((data: any) => {
                     res.end(data.toString());
                 });
             }
@@ -147,6 +161,7 @@ export default class NetCore {
                     console.log(color.bold(color.green(`[!]`) + " Added public file: " + files[file]))
                     this.server.on("request", (req, res) => {
                         if (req.method == "GET" && req.url == "/" + files[file]) {
+                            //@ts-ignore
                             res.setHeader("Content-Type", this.returnMimeType(files[file].split(".")[1]))
                             res.end(data, "binary");
                         }
@@ -169,6 +184,7 @@ export default class NetCore {
                         res.statusCode = 404;
                         res.end("404 Not Found");
                     } else {
+                        //@ts-expect-error
                         res.setHeader("Content-Type", this.returnMimeType((req.url as string).split(".")[1]))
                         res.end(data, "binary");
                     }
@@ -193,5 +209,15 @@ export default class NetCore {
         this.server.listen(this.port);
         this.listening = true;
         console.log(color.bold(color.blue("Papaya.js Server is listening on port " + this.port)))
+
+        this.server.on("request", (req, res) => {
+            let engine = new DynamicEngine().matchDynamicPaths(this.paths, req.url?.split("?")[0] as string)
+
+            //@ts-expect-error
+            this.functions.find((a) => a.name == Object.keys(engine)[0])?.fn(req, res, {}, engine[Object.keys(engine)[0]]).then(data => {
+                res.setHeader("Content-Type", "text/html")
+                res.end(data.toString());
+            })
+        })
     }
 }

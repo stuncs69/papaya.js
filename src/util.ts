@@ -1,5 +1,6 @@
 import fs from "fs";
 import ejs from "ejs";
+import pug from "pug";
 
 /**
  * Returns the contents of a file in the public folder
@@ -12,6 +13,28 @@ function renderPublic(path: string): Promise<string> {
             if (err) reject(err);
             resolve(data.toString());
         })
+    })
+}
+
+/**
+ * Renders a file to HTML with given data.
+ * @param path Filename in the public folder
+ * @param data Object containing EJS/Pug data.
+ * @returns 
+ */
+function render(path: string, data: any): Promise<string> {
+    return new Promise((resolve, _reject) => {
+        switch(true) {
+            case path.endsWith("pug"):
+                let x = pug.compileFile(`server/public/${path}`)
+                resolve(x(data))
+                break;
+            case path.endsWith("ejs"):
+                renderEJS(path, data).then(result => resolve(result))
+                break;
+            default:
+                renderPublic(path).then(result => resolve(result))
+        }
     })
 }
 
@@ -51,7 +74,7 @@ function extractGetParameters(request: Request): any {
  * @returns Promise<any>
  */
 function getPostBody(request: any): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _reject) => {
         let body = {};
         request.on("data", (data: any) => {
             body = JSON.parse(data.toString());
@@ -62,4 +85,4 @@ function getPostBody(request: any): Promise<any> {
     })
 }
 
-export { renderPublic, renderEJS, extractGetParameters, getPostBody }
+export { renderPublic, renderEJS, extractGetParameters, getPostBody, render }
