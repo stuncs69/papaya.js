@@ -5,9 +5,9 @@ export class DynamicEngine {
         const results: Record<string, Record<string, string>> = {};
 
         paths.forEach(path => {
-            const regexPattern = new RegExp('^' + path.replace(/\[.*?\]/g, '(\\w+)') + '$');
+            const regexPattern = new RegExp('^' + path.replace(/\[.*?\]/g, '([^/]+)') + '$');
             const match = userInput.match(regexPattern);
-            
+
             if (match !== null) {
                 const dynamicValues: Record<string, string> = {};
                 const dynamicParts = path.match(/\[\w+\]/g);
