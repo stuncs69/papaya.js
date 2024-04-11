@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8941a899-0b3f-4d00-aa31-a64d61fc1c19" name="Changes" comment="Add Jest testing setup and improve dynamic path matching&#10;&#10;Implemented Jest testing setup with configuration file and added a test suite for the DynamicEngine. Enhanced DynamicEngine's regex matching to properly handle dynamic path segments. Updated dependencies in package.json to include necessary testing libraries.">
+      <change afterPath="$PROJECT_DIR$/tests/dynamicRoutes.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bun.lockb" beforeDir="false" afterPath="$PROJECT_DIR$/bun.lockb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/dynamicengine.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/dynamicengine.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/server.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sympact06&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sympact06/papaya.js.git&quot;,
+    &quot;accountId&quot;: &quot;ec14d892-a03d-461f-a440-b527c183dcdc&quot;
+  }
+}</component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2exxeFNWrPSISoQ8K0KOIWASQZ8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/sympact/WebstormProjects/papaya.js/tests",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.sync",
+    "ts.external.directory.path": "/home/sympact/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-WS-241.14494.235" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8941a899-0b3f-4d00-aa31-a64d61fc1c19" name="Changes" comment="" />
+      <created>1712860125001</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712860125001</updated>
+      <workItem from="1712860126615" duration="50000" />
+      <workItem from="1712860200480" duration="3954000" />
+    </task>
+    <task id="LOCAL-00001" summary="Add bun files to .gitignore&#10;&#10;The bun and bun.lockb files have been added to the .gitignore file. This is to prevent unwanted tracking or versioning of these specific files by Git.">
+      <option name="closed" value="true" />
+      <created>1712860386213</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1712860386213</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add Jest testing setup and improve dynamic path matching&#10;&#10;Implemented Jest testing setup with configuration file and added a test suite for the DynamicEngine. Enhanced DynamicEngine's regex matching to properly handle dynamic path segments. Updated dependencies in package.json to include necessary testing libraries.">
+      <option name="closed" value="true" />
+      <created>1712862078929</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712862078929</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/index.d.ts" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add bun files to .gitignore&#10;&#10;The bun and bun.lockb files have been added to the .gitignore file. This is to prevent unwanted tracking or versioning of these specific files by Git." />
+    <MESSAGE value="Add Jest testing setup and improve dynamic path matching&#10;&#10;Implemented Jest testing setup with configuration file and added a test suite for the DynamicEngine. Enhanced DynamicEngine's regex matching to properly handle dynamic path segments. Updated dependencies in package.json to include necessary testing libraries." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Jest testing setup and improve dynamic path matching&#10;&#10;Implemented Jest testing setup with configuration file and added a test suite for the DynamicEngine. Enhanced DynamicEngine's regex matching to properly handle dynamic path segments. Updated dependencies in package.json to include necessary testing libraries." />
+  </component>
+  <component name="com.github.evgenys91.machinet.common.dslhistory.DslHistoryState">
+    <option name="historyDtoById">
+      <map>
+        <entry key="293903">
+          <value>
+            <ChatHistoryModel>
+              <option name="contextFilesPaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/classes/dynamicengine.ts" />
+                  <option value="$PROJECT_DIR$/example/test.ts" />
+                  <option value="$PROJECT_DIR$/lib/example/test.js" />
+                  <option value="$PROJECT_DIR$/example/server/get/test.ts" />
+                </list>
+              </option>
+              <option name="id" value="293903" />
+              <option name="initiateTms" value="1712862504555" />
+              <option name="request" value=" write a test for this intergration" />
+              <option name="response" value="" />
+              <option name="responseDescription" value="To write a test for the integration of dynamic route handling with `@id` and `:id` patterns, you'll need to simulate requests to your server and verify that it correctly matches these dynamic routes and extracts the parameters. This example will use Jest, a popular testing framework for JavaScript and TypeScript, but the general approach can be adapted to other testing frameworks as well.&#10;&#10;### Step 1: Set Up Jest&#10;&#10;If you haven't already, you'll need to set up Jest in your project. You can do this by running:&#10;&#10;```bash&#10;npm install --save-dev jest ts-jest @types/jest&#10;```&#10;&#10;Then, configure Jest to work with TypeScript by adding a `jest.config.js` file to your project root:&#10;&#10;```javascript&#10;// jest.config.js&#10;module.exports = {&#10;  preset: 'ts-jest',&#10;  testEnvironment: 'node',&#10;};&#10;```&#10;&#10;### Step 2: Write the Test&#10;&#10;Create a new test file, for example, `tests/dynamicRoutes.test.ts`. In this file, you'll write a test that starts your server, sends requests to dynamic routes, and verifies that the parameters are correctly extracted.&#10;&#10;```typescript&#10;// tests/dynamicRoutes.test.ts&#10;import { PapayaServer } from '../src/index'; // Adjust the import path according to your project structure&#10;import { DynamicEngine } from '../src/classes/dynamicengine'; // Adjust the import path&#10;&#10;describe('Dynamic Route Handling', () =&gt; {&#10;  let server: PapayaServer;&#10;&#10;  beforeAll(() =&gt; {&#10;    server = new PapayaServer();&#10;    // Assuming PapayaServer has a method to add routes directly for testing purposes&#10;    server.addRoute('/user/:id', (req, res) =&gt; {&#10;      res.send(req.params.id);&#10;    });&#10;    server.addRoute('/product/@id', (req, res) =&gt; {&#10;      res.send(req.params.id);&#10;    });&#10;    server.listen(3000); // Listen on an available port for testing&#10;  });&#10;&#10;  afterAll(() =&gt; {&#10;    server.close(); // Make sure to close the server after tests&#10;  });&#10;&#10;  it('should extract :id parameter from the route', async () =&gt; {&#10;    const response = await fetch('http://localhost:3000/user/123');&#10;    const text = await response.text();&#10;    expect(text).toBe('123');&#10;  });&#10;&#10;  it('should extract @id parameter from the route', async () =&gt; {&#10;    const response = await fetch('http://localhost:3000/product/@456');&#10;    const text = await response.text();&#10;    expect(text).toBe('456');&#10;  });&#10;});&#10;```&#10;&#10;### Step 3: Run the Test&#10;&#10;To run the test, add a script to your `package.json`:&#10;&#10;```json&#10;&quot;scripts&quot;: {&#10;  &quot;test&quot;: &quot;jest&quot;&#10;}&#10;```&#10;&#10;Then, execute the test by running:&#10;&#10;```bash&#10;npm test&#10;```&#10;&#10;### Notes&#10;&#10;- This example assumes that your `PapayaServer` class has methods for adding routes and starting/stopping the server, which might not match your actual implementation. You'll need to adjust the test setup to fit your server's API.&#10;- The `fetch` function used in the tests is not available in Node.js by default. You can use a library like `node-fetch` or `axios` for making HTTP requests in your tests. If you choose to use one of these libraries, make sure to install it first.&#10;- Ensure your server is not already running on the port you choose for testing to avoid port conflicts.&#10;&#10;This test checks the basic functionality of dynamic route handling. Depending on your application's complexity, you might need to write more detailed tests, including those that verify the handling of incorrect paths or the extraction of multiple parameters." />
+              <option name="responseFileName" value="" />
+              <option name="responseFilePath" value="" />
+              <option name="responseTms" value="1712862539718" />
+              <option name="usedLocalFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/example/test.ts" />
+                  <option value="$PROJECT_DIR$/src/classes/dynamicengine.ts" />
+                  <option value="$PROJECT_DIR$/example/server/get/test.ts" />
+                  <option value="$PROJECT_DIR$/lib/example/test.js" />
+                </list>
+              </option>
+            </ChatHistoryModel>
+          </value>
+        </entry>
+        <entry key="70f0ff">
+          <value>
+            <ChatHistoryModel>
+              <option name="contextFilesPaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/classes/server.ts" />
+                </list>
+              </option>
+              <option name="id" value="70f0ff" />
+              <option name="initiateTms" value="1712862440914" />
+              <option name="request" value=" Implement &#10;Dynamic routes like @id or :id. for me." />
+              <option name="response" value="" />
+              <option name="responseDescription" value="To implement dynamic routes that can handle patterns like `@id` or `:id`, you'll need to adjust the way your server matches routes and extracts parameters from the URL. This involves modifying the `DynamicEngine` class to recognize and extract parameters from these new patterns. Additionally, you'll need to ensure that the server can correctly identify and pass these parameters to the route handlers.&#10;&#10;Here's how you can implement this feature:&#10;&#10;### Step 1: Update the `DynamicEngine` Class&#10;&#10;First, let's update the `DynamicEngine` class to handle `@id` and `:id` patterns. This involves modifying the `matchDynamicPaths` method to recognize these patterns and extract the corresponding parameters.&#10;&#10;```typescript&#10;// src/classes/dynamicengine.ts&#10;&#10;export class DynamicEngine {&#10;    constructor() {}&#10;&#10;    matchDynamicPaths(paths: string[], userInput: string): Record&lt;string, Record&lt;string, string&gt;&gt; {&#10;        const results: Record&lt;string, Record&lt;string, string&gt;&gt; = {};&#10;&#10;        paths.forEach(path =&gt; {&#10;            // Updated regex pattern to recognize :param and @param patterns&#10;            const regexPattern = new RegExp('^' + path.replace(/(\[@:\]\w+)/g, '([^/]+)').replace(/\[.*?\]/g, '([^/]+)') + '$');&#10;            const match = userInput.match(regexPattern);&#10;&#10;            if (match !== null) {&#10;                const dynamicValues: Record&lt;string, string&gt; = {};&#10;                // Updated to extract :param and @param along with [param]&#10;                const dynamicParts = path.match(/(\[@:\]\w+)|\[\w+\]/g);&#10;                if (dynamicParts !== null) {&#10;                    dynamicParts.forEach((placeholder, index) =&gt; {&#10;                        // Remove special characters from the placeholder name&#10;                        const paramName = placeholder.replace(/[\[\]@:]/g, '');&#10;                        dynamicValues[paramName] = match[index + 1];&#10;                    });&#10;                }&#10;                results[path] = dynamicValues;&#10;            }&#10;        });&#10;&#10;        return results;&#10;    }&#10;}&#10;```&#10;&#10;### Step 2: Ensure Route Registration Handles Dynamic Patterns&#10;&#10;When registering routes in your `PapayaServer` class, ensure that the paths you add to `this.usedRoutes` and the paths you register with `this.networking.addGet` or `this.networking.addPost` correctly reflect these dynamic patterns. Since the logic for route registration already supports dynamic paths using square brackets (e.g., `[param]`), it should inherently support the new `@id` and `:id` patterns with the updated `DynamicEngine` logic.&#10;&#10;### Step 3: Test the Dynamic Route Handling&#10;&#10;After implementing these changes, you should test the dynamic route handling to ensure it works as expected. This involves creating routes that use the `@id` or `:id` patterns in their paths and verifying that the parameters are correctly extracted and passed to the route handlers.&#10;&#10;For example, you might define a route like `/user/:id` or `/product/@id` and then test that the `id` parameter is correctly extracted from URLs like `/user/123` or `/product/456`.&#10;&#10;### Conclusion&#10;&#10;By updating the `DynamicEngine` class to recognize and extract parameters from `@id` and `:id` patterns, and ensuring that your route registration logic supports these patterns, you can implement dynamic route handling in your server. This allows for more flexible and expressive route definitions, making it easier to build RESTful APIs and web applications." />
+              <option name="responseFileName" value="" />
+              <option name="responseFilePath" value="" />
+              <option name="responseTms" value="1712862472865" />
+              <option name="usedIndexedFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/networking.ts" />
+                  <option value="$PROJECT_DIR$/example/server/get/test.ts" />
+                  <option value="$PROJECT_DIR$/tests/dynamicengine.test.ts" />
+                  <option value="$PROJECT_DIR$/src/classes/papayaroute.ts" />
+                  <option value="$PROJECT_DIR$/src/classes/dynamicengine.ts" />
+                </list>
+              </option>
+              <option name="usedLocalFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/classes/server.ts" />
+                </list>
+              </option>
+            </ChatHistoryModel>
+          </value>
+        </entry>
+        <entry key="e0122d">
+          <value>
+            <ChatHistoryModel>
+              <option name="contextFilesPaths">
+                <list>
+                  <option value="$PROJECT_DIR$/tests/dynamicRoutes.test.ts" />
+                  <option value="$PROJECT_DIR$/index.ts" />
+                </list>
+              </option>
+              <option name="id" value="e0122d" />
+              <option name="initiateTms" value="1712862631688" />
+              <option name="request" value=" this is a example // index.ts&#10;                  import { PapayaServer } from &quot;papaya.js&quot;;&#10;                  &#10;                  const server = new PapayaServer();&#10;                  &#10;                  // Middleware&#10;                  server.use(function testWare(req, res) {&#10;                      return new Promise((resolve, reject) =&gt; {&#10;                          resolve(&quot;TestData&quot;)&#10;                      })&#10;                  })&#10;                  &#10;                  server.listen();&#10;                  &#10;                  // ./server/get/index.ts&#10;                  import {  renderPublic, PapayaRoute } from &quot;papaya.j&quot;&#10;                  &#10;                  export default class GetIndex extends PapayaRoute {&#10;                      path = &quot;/&quot;;&#10;                      callback = () =&gt; {&#10;                          return new Promise((resolve) =&gt; {&#10;                              resolve(renderPublic(&quot;index.html&quot;));&#10;                          })&#10;                      };&#10;                  } now make the tests test the @id :id thing" />
+              <option name="response" value="" />
+              <option name="responseDescription" value="To test the dynamic route handling for `@id` and `:id` patterns in the context of your example, we'll need to make a few assumptions:&#10;&#10;1. Your `PapayaServer` class has a method to dynamically add routes that can parse and extract parameters from the URL path.&#10;2. The server is capable of handling HTTP requests in tests, either through a real HTTP server or by mocking network interactions.&#10;&#10;Given these assumptions, let's write tests that specifically target the functionality of extracting `@id` and `:id` from the route. We'll use `node-fetch` for making HTTP requests in our tests. If you haven't installed `node-fetch`, you can do so by running `npm install node-fetch`.&#10;&#10;### Step 1: Adjust the Server Setup for Testing&#10;&#10;First, ensure your server can be started and stopped within tests to avoid port conflicts and ensure each test runs in isolation. This might involve adding methods to start and stop the server or to dynamically set the listening port.&#10;&#10;### Step 2: Write the Test File&#10;&#10;Create a test file named `dynamicRoutes.test.ts` in your tests directory. Here's how you might structure the tests:&#10;&#10;```typescript&#10;// dynamicRoutes.test.ts&#10;import fetch from 'node-fetch';&#10;import { PapayaServer } from '../src/index'; // Adjust the import path according to your project structure&#10;&#10;describe('Dynamic Route Handling', () =&gt; {&#10;  let server: PapayaServer;&#10;  const testPort = 3001; // Use a unique port for testing&#10;&#10;  beforeAll(() =&gt; {&#10;    server = new PapayaServer();&#10;    // Dynamically add routes that use :id and @id patterns&#10;    server.addRoute('/user/:id', (req, res) =&gt; {&#10;      res.send(`User ID: ${req.params.id}`);&#10;    });&#10;    server.addRoute('/product/@id', (req, res) =&gt; {&#10;      res.send(`Product ID: ${req.params.id}`);&#10;    });&#10;    server.listen(testPort); // Start the server on the test port&#10;  });&#10;&#10;  afterAll(() =&gt; {&#10;    server.close(); // Stop the server after the tests&#10;  });&#10;&#10;  it('should extract :id parameter from the route', async () =&gt; {&#10;    const response = await fetch(`http://localhost:${testPort}/user/123`);&#10;    const text = await response.text();&#10;    expect(text).toBe('User ID: 123');&#10;  });&#10;&#10;  it('should extract @id parameter from the route', async () =&gt; {&#10;    const response = await fetch(`http://localhost:${testPort}/product/@456`);&#10;    const text = await response.text();&#10;    expect(text).toBe('Product ID: 456');&#10;  });&#10;});&#10;```&#10;&#10;### Step 3: Run the Tests&#10;&#10;Ensure you have a test script in your `package.json`:&#10;&#10;```json&#10;&quot;scripts&quot;: {&#10;  &quot;test&quot;: &quot;jest&quot;&#10;}&#10;```&#10;&#10;Then, run the tests with:&#10;&#10;```bash&#10;npm test&#10;```&#10;&#10;### Notes&#10;&#10;- This example assumes the existence of `addRoute` and `close` methods on your `PapayaServer` class, which you may need to implement or adjust according to your actual server API.&#10;- The test uses a hard-coded port (`3001` in this case). In a real-world scenario, you might want to use a library to find an available port dynamically to avoid conflicts.&#10;- Ensure that `node-fetch` is installed in your project, or replace it with any other library you prefer for making HTTP requests in Node.js environments.&#10;- Adjust the import paths according to your project's structure." />
+              <option name="responseFileName" value="" />
+              <option name="responseFilePath" value="" />
+              <option name="responseTms" value="1712862666990" />
+              <option name="usedIndexedFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/lib/example/test.js" />
+                  <option value="$PROJECT_DIR$/example/test.ts" />
+                  <option value="$PROJECT_DIR$/README.md" />
+                  <option value="$PROJECT_DIR$/lib/example/server/get/index.js" />
+                  <option value="$PROJECT_DIR$/src/classes.ts" />
+                  <option value="$PROJECT_DIR$/example/server/get/index.ts" />
+                  <option value="$PROJECT_DIR$/lib/src/classes.js" />
+                  <option value="$PROJECT_DIR$/src/classes/server.ts" />
+                  <option value="$PROJECT_DIR$/lib/index.js" />
+                </list>
+              </option>
+              <option name="usedLocalFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/tests/dynamicRoutes.test.ts" />
+                  <option value="$PROJECT_DIR$/index.ts" />
+                </list>
+              </option>
+            </ChatHistoryModel>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
